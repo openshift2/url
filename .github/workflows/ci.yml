@@ -74,7 +74,8 @@ jobs:
 
     name: ${{ matrix.name }}
     timeout-minutes: 120
-    runs-on: ${{matrix.os}}
+    # runs-on: ${{matrix.os}}
+    runs-on: ['self-hosted']
     container: ${{matrix.container}}
 
     steps:
