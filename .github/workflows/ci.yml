@@ -39,14 +39,14 @@ jobs:
           # Latest
           - { name: 'GCC 11 (Latest): C++17-20', toolset: gcc-11, cxx: g++-11, cc: gcc-11, cxxstd: "17,20", os: [ self-hosted, linux, x64, ubuntu-2204 ], install: [ g++-11 ], sources: [ "ppa:ubuntu-toolchain-r/test" ] }
           - { name: 'Clang 12 (Latest): C++17-20', toolset: clang, cxx: clang++-12, cc: clang-12, cxxstd: "17,20", os: [ self-hosted, linux, x64, ubuntu-2204 ], install: [ clang-12 ] }
-          - { name: 'MSVC 14.3 (Latest): C++17-20', toolset: msvc-14.3, cxxstd: "17,20", address-model: '32,64', os: [ self-hosted, linux, x64, windows-2022 ] }
+          - { name: 'MSVC 14.3 (Latest): C++17-20', toolset: msvc-14.3, cxxstd: "17,20", address-model: '32,64', os: [ self-hosted, windows, x64, windows-2022 ] }
           - { name: 'Clang 12 + libc++ (Latest): C++17-20', toolset: clang, cxx: clang++-12, cc: clang-12, cxxstd: "17,20", cxxflags: -stdlib=libc++, linkflags: -stdlib=libc++, os: [ self-hosted, linux, x64, ubuntu-2004 ], install: [ clang-12, libc++-12-dev, libc++abi-12-dev ] }
           - { name: 'AppleClang (Latest): C++11-17', toolset: clang, cxxstd: "11,14,17", os: macos-11 }
 
           # Oldest
           - { name: 'GCC 4.8 (Oldest): C++11', toolset: gcc-4.8, cxx: g++-4.8, cc: gcc-4.8, cxxstd: "11", os: [ self-hosted, linux, x64, ubuntu-2204 ], container: 'ubuntu:18.04', install: [ g++-4.8 ] }
           - { name: 'Clang 3.8 (Oldest): C++11', toolset: clang, cxx: clang++-3.8, cc: clang-3.8, cxxstd: "11", os: [ self-hosted, linux, x64, ubuntu-2204 ], container: 'ubuntu:16.04', install: [ clang-3.8 ] }
-          - { name: 'MSVC 14.2 (Oldest): C++14-17', toolset: msvc-14.2, cxxstd: "14,17", address-model: '32,64', os: [ self-hosted, linux, x64, windows-2019 ] }
+          - { name: 'MSVC 14.2 (Oldest): C++14-17', toolset: msvc-14.2, cxxstd: "14,17", address-model: '32,64', os: [ self-hosted, windows, x64, windows-2019 ] }
 
           # Special
           - { name: 'UBSan (GCC 11: C++17-20)', toolset: gcc-11, cxx: g++-11, cc: gcc-11, cxxstd: "17,20", ubsan: true, os: [ self-hosted, linux, x64, ubuntu-2204 ], install: [ g++-11 ], sources: [ "ppa:ubuntu-toolchain-r/test" ] }
@@ -85,6 +85,7 @@ jobs:
           whoami
           pwd
           ls -al
+          ps -ef | grep -i runner || true
 
       - name: Clone Boost.URL
         uses: actions/checkout@v3
