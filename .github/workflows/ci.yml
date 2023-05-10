@@ -112,6 +112,12 @@ jobs:
         shell: bash
         run: |
           set -xe
+          echo "Debugg"
+          pwd || true
+          whoami || true
+          env || true
+          which g++ || true
+          which gcc || true
           module=${GITHUB_REPOSITORY#*/}
           echo "module=$module" >> $GITHUB_OUTPUT
           workspace_root=$(echo "$GITHUB_WORKSPACE" | sed 's/\\/\//g')
