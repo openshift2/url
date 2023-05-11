@@ -84,7 +84,8 @@ jobs:
         run: |
           whoami
           pwd
-          ls -al
+          echo "HOME is $HOME. listing: "
+          ls -al $HOME || true
           ps -ef | grep -i runner || true
 
       - name: Clone Boost.URL
