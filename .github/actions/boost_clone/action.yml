@@ -270,8 +270,9 @@ runs:
       working-directory: ${{ inputs.boost_dir }}
       shell: bash
       run: |
+        set -xe
         # Update all boost submodules
-        git submodule update --depth 1 --jobs ${{ steps.cpu-cores.outputs.count }}--init --recursive
+        git submodule update --depth 1 --jobs ${{ steps.cpu-cores.outputs.count }} --init --recursive
 
     # Initialize specified submodules if boost not found in cache and submodules were specified
     - name: Initialize specified submodules
@@ -279,6 +280,7 @@ runs:
       working-directory: ${{ inputs.boost_dir }}
       shell: bash
       run: |
+        set -xe
         # Scan transitive dependencies and update submodules
         ${{ (inputs.trace-commands == 'true' && 'set -xe') || '' }}
         git submodule update --depth 1 -q --init tools/boostdep    
@@ -289,7 +291,7 @@ runs:
         for module in ${modules// / }
         do
             echo "Initialize submodule $module"
-            git submodule update --depth 1 --jobs ${{ steps.cpu-cores.outputs.count }} -q --init libs/$module || true
+            git submodule update --depth 1 --jobs ${{ steps.cpu-cores.outputs.count }} --init libs/$module || true
         done
         
         # Initialize dependencies of each explicitly specified module
