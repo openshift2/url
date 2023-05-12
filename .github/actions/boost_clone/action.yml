@@ -304,6 +304,7 @@ runs:
             echo "Run boostdep for required module $module"
             set +e
             $python_path tools/boostdep/depinst/depinst.py --include benchmark --include example --include examples --include tools --include source --git_args "--jobs ${{ steps.cpu-cores.outputs.count }} --depth 1" $module
+            $python_path tools/boostdep/depinst/depinst.py --include benchmark --include example --include examples --include tools --include source --git_args "--depth 1" $module
             python_exit_code=$?
             set -e
             if [ $python_exit_code -ne 0 ]; then
@@ -314,5 +315,6 @@ runs:
         
         if [ $python_exit_code -ne 0 ]; then
           echo "Boostdep failed. Initializing all modules..."
-          git submodule update --depth 1 --jobs ${{ steps.cpu-cores.outputs.count }}--init --recursive
+          # jobs removed here:
+          git submodule update --depth 1 --init --recursive
         fi
