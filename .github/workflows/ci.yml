@@ -46,7 +46,7 @@ jobs:
           # Oldest
           - { name: 'GCC 4.8 (Oldest): C++11', toolset: gcc-4.8, cxx: g++-4.8, cc: gcc-4.8, cxxstd: "11", os: [ self-hosted, linux, x64, ubuntu-2204 ], container: 'ubuntu:18.04', install: [ g++-4.8 ] }
           - { name: 'Clang 3.8 (Oldest): C++11', toolset: clang, cxx: clang++-3.8, cc: clang-3.8, cxxstd: "11", os: [ self-hosted, linux, x64, ubuntu-2204 ], container: 'ubuntu:16.04', install: [ clang-3.8 ] }
-          { name: 'MSVC 14.2 (Oldest): C++14-17', toolset: msvc-14.2, cxxstd: "14,17", address-model: '32,64', os: [ self-hosted, windows, x64, windows-2019 ] }
+          - { name: 'MSVC 14.2 (Oldest): C++14-17', toolset: msvc-14.2, cxxstd: "14,17", address-model: '32,64', os: [ self-hosted, windows, x64, windows-2019 ] }
 
           # Special
           - { name: 'UBSan (GCC 11: C++17-20)', toolset: gcc-11, cxx: g++-11, cc: gcc-11, cxxstd: "17,20", ubsan: true, os: [ self-hosted, linux, x64, ubuntu-2204 ], install: [ g++-11 ], sources: [ "ppa:ubuntu-toolchain-r/test" ] }
