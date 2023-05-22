@@ -10,7 +10,8 @@ on:
 jobs:
   fuzz:
 
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - name: Fetch head
