@@ -31,6 +31,14 @@ jobs:
             os: ubuntu-latest
           - name: test6
             os: ubuntu-latest
+          - name: test7
+            os: ubuntu-latest
+          - name: test8
+            os: ubuntu-latest
+          - name: test9
+            os: ubuntu-latest
+          - name: test10
+            os: ubuntu-latest
     name: ${{ matrix.name }}
     timeout-minutes: 120
     runs-on: ${{ matrix.os }}
@@ -39,4 +47,5 @@ jobs:
         shell: bash
         run: |
           echo "Running the test on ${{ matrix.os }}"
+          sleep 600
           true
