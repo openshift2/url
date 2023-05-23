@@ -38,5 +38,5 @@ jobs:
       - name: Test
         shell: bash
         run: |
-          echo "Running the test"
+          echo "Running the test on ${{ matrix.os }}"
           true
