@@ -64,7 +64,7 @@ runs:
 
         labelmatrix="{ "
 
-        if [ ${use_self_hosted_runners} = "true" ]; then
+        if [ ${use_self_hosted_runners} == "true" ]; then
           for image in ${supported_images_linux}; do 
             # basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
             basicimage=${image}
