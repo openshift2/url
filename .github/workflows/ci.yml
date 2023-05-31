@@ -42,7 +42,7 @@ jobs:
         id: tester
         shell: bash
         run: |
-          echo "labelmatrix2={ \"ubuntu-22.04\": \"AAAmyrunner1\", \"ubuntu-latest\": \"SSSmyrunner2\" }" >> $GITHUB_OUTPUT
+          echo "labelmatrix2={ \"ubuntu-22\": { \"04\": \"AAAmyrunner1\"}, \"ubuntu-latest\": \"SSSmyrunner2\" }" >> $GITHUB_OUTPUT
       - name: testerx
         id: testerx
         shell: bash
@@ -118,7 +118,7 @@ jobs:
           echo "Matrix 3"
           echo ${{ needs.runner-selection.outputs.labelmatrix3 }} || true
           echo "Matrix 4 dereference1"
-          echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix3)["ubuntu-22.04"] }} || true
+          echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix2.ubuntu-22.04) }} || true
 
       - name: Install packages
         if: ${{ !startsWith(matrix.os, 'windows') && (matrix.container || matrix.install) }}
