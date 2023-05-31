@@ -31,7 +31,7 @@ jobs:
   runner-selection:
     runs-on: ubuntu-latest
     outputs:
-      labelmatrix: ${{ steps.aws_hosted.outputs.labelmatrix }}
+      labelmatrix: ${{ steps.aws_hosted_labels.outputs.labelmatrix }}
     steps:
       - name: Clone repo
         uses: actions/checkout@v3

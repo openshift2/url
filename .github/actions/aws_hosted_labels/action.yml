@@ -96,3 +96,4 @@ runs:
         labelmatrix=$( echo "$labelmatrix" | sed 's/,\s*$//' )
         labelmatrix="$labelmatrix }"
         echo "labelmatrix=$labelmatrix" >> $GITHUB_OUTPUT
+        echo "$labelmatrix"
