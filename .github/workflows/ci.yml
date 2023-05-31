@@ -87,8 +87,8 @@ jobs:
     name: ${{ matrix.name }}
     timeout-minutes: 120
     needs: [runner-selection]
-    # runs-on: ${{ fromJSON(needs.runner-selection.outputs[matrix.os]) }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON(needs.runner-selection.outputs[matrix.os]) }}
+    # runs-on: ubuntu-latest
     container: ${{matrix.container}}
 
     steps:
