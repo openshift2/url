@@ -22,7 +22,7 @@ runs:
         elif [ $use_self_hosted_runners_override = "false" ]; then
             use_self_hosted_runners="false"
         else
-            checkweb=$(curl --connect-timeout 3 https://githubactions.cpp.al/use_self_hosted_runners.txt)
+            checkweb=$(curl --connect-timeout 3 https://gha.cpp.al/use_self_hosted_runners.txt) || true
             if [ $checkweb = "true" ]; then
                 use_self_hosted_runners="true"
             elif [ $checkweb = "false" ]; then
