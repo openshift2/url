@@ -87,7 +87,7 @@ jobs:
     name: ${{ matrix.name }}
     timeout-minutes: 120
     needs: [runner-selection]
-    # runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     container: ${{matrix.container}}
 
     steps:
