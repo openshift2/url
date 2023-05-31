@@ -2,7 +2,7 @@ name: 'aws_hosted_labels'
 description: 'Modify labels, sending jobs to self-hosted runners'
 
 inputs:
-  use_self_hosted_runners_override:
+  self_hosted_runners_override:
     required: false
     default:
 
@@ -17,24 +17,24 @@ runs:
       shell: bash
       run: |
         set -xe
-        echo "Input is ${{ inputs.use_self_hosted_runners_override }}"
-        if [ ${{ inputs.use_self_hosted_runners_override }} == "true" ]; then
-            use_self_hosted_runners="true"
+        echo "Input is ${{ inputs.self_hosted_runners_override }}"
+        if [ ${{ inputs.self_hosted_runners_override }} == "true" ]; then
+            self_hosted_runners="true"
             echo "true"
-        elif [ ${{ inputs.use_self_hosted_runners_override }} == "false" ]; then
-            use_self_hosted_runners="false"
+        elif [ ${{ inputs.self_hosted_runners_override }} == "false" ]; then
+            self_hosted_runners="false"
             echo "false"
         else
-            checkweb=$(curl --connect-timeout 3 https://gha.cpp.al/use_self_hosted_runners.txt) || true
+            checkweb=$(curl --connect-timeout 3 https://gha.cpp.al/self_hosted_runners.txt) || true
             if [ $checkweb == "true" ]; then
-                use_self_hosted_runners="true"
+                self_hosted_runners="true"
                 echo "true"
             elif [ $checkweb == "false" ]; then
-                use_self_hosted_runners="false"
+                self_hosted_runners="false"
                 echo "false"
             else
                 # the default
-                use_self_hosted_runners="true"
+                self_hosted_runners="true"
                 echo "default true"
             fi
         fi
@@ -64,7 +64,7 @@ runs:
 
         labelmatrix="{ "
 
-        if [ ${use_self_hosted_runners} == "true" ]; then
+        if [ ${self_hosted_runners} == "true" ]; then
           for image in ${supported_images_linux}; do 
             # basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
             basicimage=${image}
