@@ -100,6 +100,7 @@ jobs:
         run: |
           set -xe
           echo "matrix2={\"ubuntu_latest\": \"ubuntu-latest\", \"ubuntu_22_04\": \"ubuntu-22.04\"}" >> $GITHUB_ENV
+          echo "yyy=ubuntu_latest" >> $GITHUB_ENV
           # echo "matrix2={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
 
       - name: debugg
@@ -115,6 +116,8 @@ jobs:
           echo ${{ fromJSON(env.matrix2)['ubuntu_22_04'] }} || true
           echo "print the matrix 4:"
           echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)['ubuntu_22_04'] }} || true
+          echo "print the matrix 5:"
+          echo ${{ fromJSON(env.matrix2)[env.yyy] }} || true
 
       - name: Install packages
         if: ${{ !startsWith(matrix.os, 'windows') && (matrix.container || matrix.install) }}
