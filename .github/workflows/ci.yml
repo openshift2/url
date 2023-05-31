@@ -112,8 +112,8 @@ jobs:
           echo ${{ needs.runner-selection.outputs.labelmatrix }} || true
           echo "print the matrix 2:"
           echo ${{ env.matrix2 }} || true
-          echo "print the matrix 3:"
-          echo ${{ fromJSON(env.matrix2)["ubuntu_22_04"]) }} || true
+          # echo "print the matrix 3:"
+          # echo ${{ fromJSON(env.matrix2)["ubuntu_22_04"]) }} || true
           # runs-on: ${{ fromJSON(needs.runner-selection.outputs[matrix.os]) }}
 
       - name: Install packages
