@@ -107,10 +107,6 @@ jobs:
           echo ${{ needs.runner-selection.outputs.labelmatrix }} || true
           echo "try to dereference 1"
           echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix) }} || true
-          echo "try to dereference 2"
-          echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)["ubuntu-22.04"] }} || true
-          echo "try to dereference 3"
-          echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)[matrix.os] }} || true
 
       - name: Install packages
         if: ${{ !startsWith(matrix.os, 'windows') && (matrix.container || matrix.install) }}
