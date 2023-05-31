@@ -120,6 +120,8 @@ jobs:
           echo ${{ fromJSON(env.matrix2)[env.yyy] }} || true
           echo "print the matrix 6:"
           echo ${{ matrix.os }} || true
+          echo "print the matrix 7:"
+          echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)[matrix.os] }} || true
 
       - name: Install packages
         if: ${{ !startsWith(matrix.os, 'windows') && (matrix.container || matrix.install) }}
