@@ -40,7 +40,7 @@ runs:
         done
 
         # Check if the switch should occur
-        use_self_hosted_runners=false
+        use_self_hosted_runners=true
 
         if ${use_self_hosted_runners}; then
           labelmatrix="{ "
