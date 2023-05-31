@@ -46,30 +46,30 @@ runs:
           labelmatrix="{ "
 
           for image in ${supported_images_linux}; do 
-            flattenedimage = $( echo "$image" | sed -e 's/[-.]/_/g' )
-            labelmatrix="$labelmatrix \"${flattenedimage}\": [ \"self-hosted\", \"linux\", \"x64\", \"${image}-aws\" ], " 
+            basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
+            labelmatrix="$labelmatrix \"${basicimage}\": [ \"self-hosted\", \"linux\", \"x64\", \"${image}-aws\" ], " 
           done
           for image in ${supported_images_windows}; do 
-            flattenedimage = $( echo "$image" | sed -e 's/[-.]/_/g' )
-            labelmatrix="$labelmatrix \"${flattenedimage}\": [ \"self-hosted\", \"linux\", \"x64\", \"${image}-aws\" ], " 
+            basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
+            labelmatrix="$labelmatrix \"${basicimage}\": [ \"self-hosted\", \"linux\", \"x64\", \"${image}-aws\" ], " 
           done
           # Note that macos is not using "self-hosted" currently:
           for image in ${supported_images_macos}; do
-            flattenedimage = $( echo "$image" | sed -e 's/[-.]/_/g' )
-            echo "${flattenedimage}=[ \"${image}\" ]" >> $GITHUB_OUTPUT
+            basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
+            echo "${basicimage}=[ \"${image}\" ]" >> $GITHUB_OUTPUT
           done
         else
           for image in ${supported_images_linux}; do
-            flattenedimage = $( echo "$image" | sed -e 's/[-.]/_/g' )
-            labelmatrix="$labelmatrix \"${flattenedimage}\": [ \"${image}\" ], "
+            basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
+            labelmatrix="$labelmatrix \"${basicimage}\": [ \"${image}\" ], "
           done
           for image in ${supported_images_windows}; do
-            flattenedimage = $( echo "$image" | sed -e 's/[-.]/_/g' )
-            labelmatrix="$labelmatrix \"${flattenedimage}\": [ \"${image}\" ], "
+            basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
+            labelmatrix="$labelmatrix \"${basicimage}\": [ \"${image}\" ], "
           done
           for image in ${supported_images_macos}; do
-            flattenedimage = $( echo "$image" | sed -e 's/[-.]/_/g' )
-            labelmatrix="$labelmatrix \"${flattenedimage}\": [ \"${image}\" ], "
+            basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
+            labelmatrix="$labelmatrix \"${basicimage}\": [ \"${image}\" ], "
           done
         fi
 
