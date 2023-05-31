@@ -48,7 +48,7 @@ jobs:
       matrix:
         include:
           # Latest
-          - { name: 'GCC 11 (Latest): C++17-20', toolset: gcc-11, cxx: g++-11, cc: gcc-11, cxxstd: "17,20", os: 'ubuntu_22_04', install: [ g++-11 ], sources: [ "ppa:ubuntu-toolchain-r/test" ] }
+          - { name: 'GCC 11 (Latest): C++17-20', toolset: gcc-11, cxx: g++-11, cc: gcc-11, cxxstd: "17,20", os: "ubuntu_22_04", install: [ g++-11 ], sources: [ "ppa:ubuntu-toolchain-r/test" ] }
           # - { name: 'Clang 12 (Latest): C++17-20', toolset: clang, cxx: clang++-12, cc: clang-12, cxxstd: "17,20", os: ubuntu_22_04, install: [ clang-12 ] }
           # - { name: 'MSVC 14.3 (Latest): C++17-20', toolset: msvc-14.3, cxxstd: "17,20", address-model: '32,64', os: windows_2022 }
           # - { name: 'Clang 12 + libc++ (Latest): C++17-20', toolset: clang, cxx: clang++-12, cc: clang-12, cxxstd: "17,20", cxxflags: -stdlib=libc++, linkflags: -stdlib=libc++, os: ubuntu_20_04, install: [ clang-12, libc++-12-dev, libc++abi-12-dev ] }
