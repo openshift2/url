@@ -87,7 +87,7 @@ jobs:
     name: ${{ matrix.name }}
     timeout-minutes: 120
     needs: [runner-selection]
-    runs-on: ${{ fromJSON(needs.runner-selection.outputs[matrix.os]) }}
+    runs-on: ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)[matrix.os] }}
     container: ${{matrix.container}}
 
     steps:
