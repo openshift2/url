@@ -52,7 +52,7 @@ runs:
           for image in ${supported_images_windows}; do 
             # basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
             basicimage=${image}
-            labelmatrix="$labelmatrix \"${basicimage}\": [ \"self-hosted\", \"linux\", \"x64\", \"${image}-aws\" ], " 
+            labelmatrix="$labelmatrix \"${basicimage}\": [ \"self-hosted\", \"windows\", \"x64\", \"${image}-aws\" ], " 
           done
           # Note: macos is not using "self-hosted" currently:
           for image in ${supported_images_macos}; do
