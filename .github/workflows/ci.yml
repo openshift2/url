@@ -99,8 +99,9 @@ jobs:
         shell: bash
         run: |
           set -xe
-          echo "matrix2={\"ubuntu_latest\": \"ubuntu-latest\", \"ubuntu_22_04\": \"ubuntu-22.04\"}" >> $GITHUB_ENV
-          echo "yyy=ubuntu_latest" >> $GITHUB_ENV
+          echo "matrix2={\"ubuntu_latest\": \"ubuntu-latest\", \"ubuntu_22_04\": \"ubuntu-22.04\" , \"ubuntu-22.04\": \"amazing-ubuntu-22.04\"}" >> $GITHUB_ENV
+          # echo "yyy=ubuntu_latest" >> $GITHUB_ENV
+          echo "yyy=ubuntu-22.04" >> $GITHUB_ENV
           # echo "matrix2={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
 
       - name: debugg
