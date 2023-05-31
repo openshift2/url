@@ -30,25 +30,13 @@ jobs:
   runner-selection:
     runs-on: ubuntu-latest
     outputs:
-      labelmatrix2: ${{ steps.tester.outputs.labelmatrix2 }}
-      labelmatrix3: ${{ steps.aws_hosted.outputs.labelmatrix1 }}
+      labelmatrix: ${{ steps.aws_hosted.outputs.labelmatrix }}
     steps:
       - name: Clone Boost.URL
         uses: actions/checkout@v3
       - name: AWS Hosted Runners
         id: aws_hosted
         uses: ./.github/actions/aws_hosted
-      - name: tester
-        id: tester
-        shell: bash
-        run: |
-          echo "labelmatrix2={ \"ubuntu-22\": { \"04\": \"AAAmyrunner1\"}, \"ubuntu-latest\": \"SSSmyrunner2\" }" >> $GITHUB_OUTPUT
-      - name: testerx
-        id: testerx
-        shell: bash
-        run: |
-          echo "blabber ${{ steps.updatelabels.outputs.labelmatrix1 }}" 
-          echo "blibber ${{ steps.aws_hosted.outputs.labelmatrix1 }}" 
 
   build:
     defaults:
@@ -106,19 +94,13 @@ jobs:
       - name: Clone Boost.URL
         uses: actions/checkout@v3
 
-      - name: Debugg
+      - name: debugg
         id: debugg
         shell: bash
         run: |
           set -xe
-          echo "Matrix 1"
-          echo ${{ needs.runner-selection.outputs.labelmatrix1 }} || true
-          echo "Matrix 2"
-          echo ${{ needs.runner-selection.outputs.labelmatrix2 }} || true
-          echo "Matrix 3"
-          echo ${{ needs.runner-selection.outputs.labelmatrix3 }} || true
-          echo "Matrix 4 dereference1"
-          echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix2.ubuntu-22.04) }} || true
+          echo "print the matrix:"
+          echo ${{ needs.runner-selection.outputs.labelmatrix }} || true
 
       - name: Install packages
         if: ${{ !startsWith(matrix.os, 'windows') && (matrix.container || matrix.install) }}
