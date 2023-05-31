@@ -16,20 +16,26 @@ runs:
       id: computelabels
       shell: bash
       run: |
-
+        set -xe
+        echo "Input is ${{ inputs.use_self_hosted_runners_override }}"
         if [ ${{ inputs.use_self_hosted_runners_override }} == "true" ]; then
             use_self_hosted_runners="true"
+            echo "true"
         elif [ ${{ inputs.use_self_hosted_runners_override }} == "false" ]; then
             use_self_hosted_runners="false"
+            echo "false"
         else
             checkweb=$(curl --connect-timeout 3 https://gha.cpp.al/use_self_hosted_runners.txt) || true
             if [ $checkweb == "true" ]; then
                 use_self_hosted_runners="true"
+                echo "true"
             elif [ $checkweb == "false" ]; then
                 use_self_hosted_runners="false"
+                echo "false"
             else
                 # the default
                 use_self_hosted_runners="true"
+                echo "default true"
             fi
         fi
 
