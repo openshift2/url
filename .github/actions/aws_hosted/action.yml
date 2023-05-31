@@ -1,6 +1,7 @@
 name: 'AWS Hosted'
 description: 'Modify labels, sending jobs to self-hosted runners'
 runs:
+  using: "composite"
   steps:
     - name: Update labels
       shell: bash
