@@ -7,53 +7,53 @@ runs:
       shell: bash
       run: |
 
-        supported_images_linux="ubuntu-latest"
-        for i in {14..44}
-        do
-          new_image="ubuntu-${i}.04"
-          supported_images_linux="${supported_images_linux} ${new_image}"
-          new_image="ubuntu-${i}.10"
-          supported_images_linux="${supported_images_linux} ${new_image}"
-        done
+        # supported_images_linux="ubuntu-latest"
+        # for i in {14..44}
+        # do
+        #   new_image="ubuntu-${i}.04"
+        #   supported_images_linux="${supported_images_linux} ${new_image}"
+        #   new_image="ubuntu-${i}.10"
+        #   supported_images_linux="${supported_images_linux} ${new_image}"
+        # done
 
-        supported_images_windows="windows-latest"
-        for i in {14..44}
-        do
-          new_image="windows-20${i}"
-          supported_images_windows="${supported_images_windows} ${new_image}"
-        done
+        # supported_images_windows="windows-latest"
+        # for i in {14..44}
+        # do
+        #   new_image="windows-20${i}"
+        #   supported_images_windows="${supported_images_windows} ${new_image}"
+        # done
 
-        supported_images_macos="macos-latest"
-        for i in {11..44}
-        do
-          new_image="macos-${i}"
-          supported_images_macos="${supported_images_macos} ${new_image}"
-        done
+        # supported_images_macos="macos-latest"
+        # for i in {11..44}
+        # do
+        #   new_image="macos-${i}"
+        #   supported_images_macos="${supported_images_macos} ${new_image}"
+        # done
 
-        # Check if the switch should occur
-        use_self_hosted_runners=true
+        # # Check if the switch should occur
+        # use_self_hosted_runners=true
 
-        if ${use_self_hosted_runners}; then
-          for image in ${supported_images_linux}; do 
-            echo "${image}=[ \"self-hosted\", \"linux\", \"x64\", \"${image}-aws\" ]" >> $GITHUB_OUTPUT
-          done
-          for image in ${supported_images_windows}; do 
-            echo "${image}=[ \"self-hosted\", \"windows\", \"x64\", \"${image}-aws\" ]" >> $GITHUB_OUTPUT
-          done
-          # Note that macos is not using "self-hosted" currently:
-          for image in ${supported_images_macos}; do
-            echo "${image}=[ \"${image}\" ]" >> $GITHUB_OUTPUT
-          done
-        else
-          for image in ${supported_images_linux}; do
-            echo "${image}=[ \"${image}\" ]" >> $GITHUB_OUTPUT
-          done
-          for image in ${supported_images_windows}; do
-            echo "${image}=[ \"${image}\" ]" >> $GITHUB_OUTPUT
-          done
-          for image in ${supported_images_macos}; do
-            echo "${image}=[ \"${image}\" ]" >> $GITHUB_OUTPUT
-          done
-        fi
+        # if ${use_self_hosted_runners}; then
+        #   for image in ${supported_images_linux}; do 
+        #     echo "${image}=[ \"self-hosted\", \"linux\", \"x64\", \"${image}-aws\" ]" >> $GITHUB_OUTPUT
+        #   done
+        #   for image in ${supported_images_windows}; do 
+        #     echo "${image}=[ \"self-hosted\", \"windows\", \"x64\", \"${image}-aws\" ]" >> $GITHUB_OUTPUT
+        #   done
+        #   # Note that macos is not using "self-hosted" currently:
+        #   for image in ${supported_images_macos}; do
+        #     echo "${image}=[ \"${image}\" ]" >> $GITHUB_OUTPUT
+        #   done
+        # else
+        #   for image in ${supported_images_linux}; do
+        #     echo "${image}=[ \"${image}\" ]" >> $GITHUB_OUTPUT
+        #   done
+        #   for image in ${supported_images_windows}; do
+        #     echo "${image}=[ \"${image}\" ]" >> $GITHUB_OUTPUT
+        #   done
+        #   for image in ${supported_images_macos}; do
+        #     echo "${image}=[ \"${image}\" ]" >> $GITHUB_OUTPUT
+        #   done
+        # fi
 
-
+        echo "labelmatrix={ \"ubuntu-22.04\": \"myrunner1\", \"ubuntu-latest\": \"myrunner2\" }" >> $GITHUB_OUTPUT

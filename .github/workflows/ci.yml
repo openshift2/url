@@ -98,10 +98,10 @@ jobs:
         shell: bash
         run: |
           set -xe
-          echo "All outputs? Probably not."
-          echo ${{ needs.runner-selection.outputs }} || true
-          echo "One output. Should be there."
-          echo ${{ needs.runner-selection.outputs.ubuntu-22.04 }} || true
+          echo "Plain results of matrix"
+          echo ${{ needs.runner-selection.outputs.labelmatrix }} || true
+          echo "Try to dereference something"
+          echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)[matrix.os] }} || true
 
       - name: Install packages
         if: ${{ !startsWith(matrix.os, 'windows') && (matrix.container || matrix.install) }}
