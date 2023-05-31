@@ -30,7 +30,7 @@ jobs:
   runner-selection:
     runs-on: ubuntu-latest
     outputs:
-      labelmatrix: ${{ steps.updatelabels.outputs.labelmatrix }}
+      labelmatrix2: ${{ steps.updatelabels.outputs.labelmatrix2 }}
     steps:
       - name: Clone Boost.URL
         uses: actions/checkout@v3
@@ -40,7 +40,7 @@ jobs:
         id: updatelabels
         shell: bash
         run: |
-          echo "labelmatrix={ \"ubuntu-22.04\": \"myrunner1\", \"ubuntu-latest\": \"myrunner2\" }" >> $GITHUB_OUTPUT
+          echo "labelmatrix2={ \"ubuntu-22.04\": \"AAAmyrunner1\", \"ubuntu-latest\": \"SSSmyrunner2\" }" >> $GITHUB_OUTPUT
 
   build:
     defaults:
@@ -103,10 +103,10 @@ jobs:
         shell: bash
         run: |
           set -xe
-          echo "Plain results of matrix"
-          echo ${{ needs.runner-selection.outputs.labelmatrix }} || true
-          echo "try to dereference 1"
-          echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix) }} || true
+          echo "Matrix 1"
+          echo ${{ needs.runner-selection.outputs.labelmatrix1 }} || true
+          echo "Matrix 2"
+          echo ${{ needs.runner-selection.outputs.labelmatrix2 }} || true
 
       - name: Install packages
         if: ${{ !startsWith(matrix.os, 'windows') && (matrix.container || matrix.install) }}

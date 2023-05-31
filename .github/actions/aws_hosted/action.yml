@@ -3,7 +3,7 @@ description: 'Modify labels, sending jobs to self-hosted runners'
 runs:
   using: "composite"
   outputs:
-    labelmatrix: ${{ steps.updatelabels.outputs.labelmatrix }}
+    labelmatrix1: ${{ steps.updatelabels.outputs.labelmatrix1 }}
   steps:
     - name: Update labels
       id: updatelabels
@@ -59,4 +59,4 @@ runs:
         #   done
         # fi
 
-        echo "labelmatrix={ \"ubuntu-22.04\": \"myrunner1\", \"ubuntu-latest\": \"myrunner2\" }" >> $GITHUB_OUTPUT
+        echo "labelmatrix1={ \"ubuntu-22.04\": \"myrunner1\", \"ubuntu-latest\": \"myrunner2\" }" >> $GITHUB_OUTPUT
