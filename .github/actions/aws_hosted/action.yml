@@ -1,7 +1,8 @@
 name: 'AWS Hosted'
 description: 'Modify labels, sending jobs to self-hosted runners'
 outputs:
-  labelmatrix1: ${{ steps.updatelabels.outputs.labelmatrix1 }}
+  labelmatrix1:
+    value: ${{ steps.updatelabels.outputs.labelmatrix1 }}
 runs:
   using: "composite"
   steps:
