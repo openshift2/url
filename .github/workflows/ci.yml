@@ -25,7 +25,6 @@ env:
   GIT_FETCH_JOBS: 8
   NET_RETRY_COUNT: 5
   DEFAULT_BUILD_VARIANT: debug,release
-  self_hosted_runners_override: "false"
 
 jobs:
   runner-selection:
@@ -38,6 +37,8 @@ jobs:
       - name: AWS Hosted Runners
         id: aws_hosted_labels
         uses: ./.github/actions/aws_hosted_labels
+        with:
+          self_hosted_runners_override: "false"
 
   build:
     defaults:
