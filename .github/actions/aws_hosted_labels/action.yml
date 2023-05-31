@@ -3,8 +3,11 @@ description: 'Modify labels, sending jobs to self-hosted runners'
 
 inputs:
   self_hosted_runners_override:
+    description: "Should self-hosted runners always be used? 'true' Never used? 'false'"
     required: false
-    default:
+  self_hosted_runners_url:
+    description: "URL. Text file containing 'true' or 'false' if self-hosted runners ought to be used."
+    required: true
 
 outputs:
   labelmatrix:
@@ -25,7 +28,7 @@ runs:
             self_hosted_runners="false"
             echo "false"
         else
-            checkweb=$(curl --connect-timeout 3 https://gha.cpp.al/self_hosted_runners.txt) || true
+            checkweb=$(curl --connect-timeout 3 ${{ inputs.self_hosted_runners_url }}) || true
             if [ $checkweb == "true" ]; then
                 self_hosted_runners="true"
                 echo "true"
@@ -34,8 +37,7 @@ runs:
                 echo "false"
             else
                 # the default
-                self_hosted_runners="true"
-                echo "default true"
+                self_hosted_runners="false"
             fi
         fi
 
