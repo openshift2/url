@@ -30,14 +30,15 @@ jobs:
   runner-selection:
     runs-on: ubuntu-latest
     outputs:
-      labelmatrix2: ${{ steps.updatelabels.outputs.labelmatrix2 }}
+      labelmatrix2: ${{ steps.tester.outputs.labelmatrix2 }}
+      labelmatrix3: ${{ steps.updatelabels.outputs.labelmatrix1 }}
     steps:
       - name: Clone Boost.URL
         uses: actions/checkout@v3
-      # - name: AWS Hosted Runners
-      #  uses: ./.github/actions/aws_hosted
-      - name: Update labels
-        id: updatelabels
+      - name: AWS Hosted Runners
+        uses: ./.github/actions/aws_hosted
+      - name: tester
+        id: tester
         shell: bash
         run: |
           echo "labelmatrix2={ \"ubuntu-22.04\": \"AAAmyrunner1\", \"ubuntu-latest\": \"SSSmyrunner2\" }" >> $GITHUB_OUTPUT
@@ -107,6 +108,8 @@ jobs:
           echo ${{ needs.runner-selection.outputs.labelmatrix1 }} || true
           echo "Matrix 2"
           echo ${{ needs.runner-selection.outputs.labelmatrix2 }} || true
+          echo "Matrix 3"
+          echo ${{ needs.runner-selection.outputs.labelmatrix3 }} || true
 
       - name: Install packages
         if: ${{ !startsWith(matrix.os, 'windows') && (matrix.container || matrix.install) }}
