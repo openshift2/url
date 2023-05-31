@@ -29,12 +29,18 @@ env:
 jobs:
   runner-selection:
     runs-on: ubuntu-latest
+    outputs:
+      labelmatrix: ${{ steps.updatelabels.outputs.labelmatrix }}
     steps:
       - name: Clone Boost.URL
         uses: actions/checkout@v3
-
-      - name: AWS Hosted Runners
-        uses: ./.github/actions/aws_hosted
+      # - name: AWS Hosted Runners
+      #  uses: ./.github/actions/aws_hosted
+      - name: Update labels
+        id: updatelabels
+        shell: bash
+        run: |
+          echo "labelmatrix={ \"ubuntu-22.04\": \"myrunner1\", \"ubuntu-latest\": \"myrunner2\" }" >> $GITHUB_OUTPUT
 
   build:
     defaults:
