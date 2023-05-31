@@ -40,7 +40,7 @@ runs:
         done
 
         # Check if the switch should occur
-        use_self_hosted_runners=true
+        use_self_hosted_runners=false
 
         if ${use_self_hosted_runners}; then
           labelmatrix="{ "
@@ -53,10 +53,10 @@ runs:
             basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
             labelmatrix="$labelmatrix \"${basicimage}\": [ \"self-hosted\", \"linux\", \"x64\", \"${image}-aws\" ], " 
           done
-          # Note that macos is not using "self-hosted" currently:
+          # Note: macos is not using "self-hosted" currently:
           for image in ${supported_images_macos}; do
             basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
-            echo "${basicimage}=[ \"${image}\" ]" >> $GITHUB_OUTPUT
+            labelmatrix="$labelmatrix \"${basicimage}\": [ \"${image}\" ], "
           done
         else
           for image in ${supported_images_linux}; do
