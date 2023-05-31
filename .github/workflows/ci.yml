@@ -87,12 +87,23 @@ jobs:
     name: ${{ matrix.name }}
     timeout-minutes: 120
     needs: [runner-selection]
-    runs-on: ${{ fromJSON(needs.runner-selection.outputs[matrix.os]) }}
+    # runs-on: ${{ fromJSON(needs.runner-selection.outputs[matrix.os]) }}
+    runs-on: ubuntu-latest
     container: ${{matrix.container}}
 
     steps:
       - name: Clone Boost.URL
         uses: actions/checkout@v3
+
+      - name: debugg
+        id: debugg
+        shell: bash
+        run: |
+          set -xe
+          echo "print the matrix:"
+          echo ${{ needs.runner-selection.outputs.labelmatrix }} || true
+          echo "print the matrix 2:"
+          echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix) }} || true
 
       - name: Install packages
         if: ${{ !startsWith(matrix.os, 'windows') && (matrix.container || matrix.install) }}

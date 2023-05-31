@@ -40,11 +40,10 @@ runs:
         done
 
         # Check if the switch should occur
-        use_self_hosted_runners=true
+        use_self_hosted_runners=false
+        labelmatrix="{ "
 
         if ${use_self_hosted_runners}; then
-          labelmatrix="{ "
-
           for image in ${supported_images_linux}; do 
             basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
             labelmatrix="$labelmatrix \"${basicimage}\": [ \"self-hosted\", \"linux\", \"x64\", \"${image}-aws\" ], " 
