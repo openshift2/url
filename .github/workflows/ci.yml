@@ -95,6 +95,14 @@ jobs:
       - name: Clone Boost.URL
         uses: actions/checkout@v3
 
+      - name: debugg1
+        id: debugg1
+        shell: bash
+        run: |
+          set -xe
+          echo "matrix2={\"ubuntu_latest\": \"ubuntu-latest\", \"ubuntu_22_04\": \"ubuntu-22.04\"}" >> $GITHUB_OUTPUT
+          # echo "matrix2={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
+
       - name: debugg
         id: debugg
         shell: bash
@@ -103,9 +111,9 @@ jobs:
           echo "print the matrix:"
           echo ${{ needs.runner-selection.outputs.labelmatrix }} || true
           echo "print the matrix 2:"
-          echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix) }} || true
+          echo ${{ env.matrix2 }} || true
           echo "print the matrix 3:"
-          echo ${{ fromJSON(needs.runner-selection.outputs.labelmatrix["ubuntu_22_04"]) }} || true
+          echo ${{ fromJSON(env.matrix2)["ubuntu_22_04"]) }} || true
           # runs-on: ${{ fromJSON(needs.runner-selection.outputs[matrix.os]) }}
 
       - name: Install packages
