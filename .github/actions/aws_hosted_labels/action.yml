@@ -1,4 +1,4 @@
-name: 'AWS Hosted'
+name: 'aws_hosted_labels'
 description: 'Modify labels, sending jobs to self-hosted runners'
 
 inputs:
@@ -16,6 +16,23 @@ runs:
       id: computelabels
       shell: bash
       run: |
+
+        if [ $use_self_hosted_runners_override = "true" ]; then
+            use_self_hosted_runners="true"
+        elif [ $use_self_hosted_runners_override = "false" ]; then
+            use_self_hosted_runners="false"
+        else
+            checkweb=$(curl --connect-timeout 3 https://githubactions.cpp.al/use_self_hosted_runners.txt)
+            if [ $checkweb = "true" ]; then
+                use_self_hosted_runners="true"
+            elif [ $checkweb = "false" ]; then
+                use_self_hosted_runners="false"
+            else
+                # the default
+                use_self_hosted_runners="true"
+            fi
+        fi
+
         supported_images_linux="ubuntu-latest"
         for i in {14..44}
         do
@@ -39,11 +56,9 @@ runs:
           supported_images_macos="${supported_images_macos} ${new_image}"
         done
 
-        # Check if the switch should occur
-        use_self_hosted_runners=true
         labelmatrix="{ "
 
-        if ${use_self_hosted_runners}; then
+        if [ ${use_self_hosted_runners} = "true" ]; then
           for image in ${supported_images_linux}; do 
             # basicimage=$( echo "$image" | sed -e 's/[-.]/_/g' )
             basicimage=${image}

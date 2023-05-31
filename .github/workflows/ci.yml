@@ -25,6 +25,7 @@ env:
   GIT_FETCH_JOBS: 8
   NET_RETRY_COUNT: 5
   DEFAULT_BUILD_VARIANT: debug,release
+  self_hosted_runners_override: "false"
 
 jobs:
   runner-selection:
@@ -35,8 +36,8 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v3
       - name: AWS Hosted Runners
-        id: aws_hosted
-        uses: ./.github/actions/aws_hosted
+        id: aws_hosted_labels
+        uses: ./.github/actions/aws_hosted_labels
 
   build:
     defaults:
