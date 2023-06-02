@@ -6,8 +6,9 @@ inputs:
     description: "Should self-hosted runners always be used? 'true' Never used? 'false'"
     required: false
   self_hosted_runners_url:
-    description: "URL. Text file containing 'true' or 'false' if self-hosted runners ought to be used."
-    required: true
+    description: "URL setting 'true' or 'false', if self-hosted runners ought to be used."
+    default: "https://gha.cpp.al/switch"
+    required: false
 
 outputs:
   labelmatrix:
@@ -19,7 +20,7 @@ runs:
       id: computelabels
       shell: bash
       run: |
-        set -xe
+        set -e
         echo "Input is ${{ inputs.self_hosted_runners_override }}"
         if [ ${{ inputs.self_hosted_runners_override }} == "true" ]; then
             self_hosted_runners="true"
@@ -104,4 +105,3 @@ runs:
         labelmatrix=$( echo "$labelmatrix" | sed 's/,\s*$//' )
         labelmatrix="$labelmatrix }"
         echo "labelmatrix=$labelmatrix" >> $GITHUB_OUTPUT
-        echo "$labelmatrix"

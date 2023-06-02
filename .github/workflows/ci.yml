@@ -38,7 +38,7 @@ jobs:
         id: aws_hosted_labels
         uses: ./.github/actions/aws_hosted_labels
         with:
-          self_hosted_runners_override: "false"
+          self_hosted_runners_override: "true"
           self_hosted_runners_url: "https://gha.cpp.al/switch"
 
   build:
