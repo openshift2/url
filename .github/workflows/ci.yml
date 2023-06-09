@@ -32,8 +32,6 @@ jobs:
     outputs:
       labelmatrix: ${{ steps.aws_hosted_labels.outputs.labelmatrix }}
     steps:
-      - name: Clone repo
-        uses: actions/checkout@v3
       - name: AWS Hosted Runners
         id: aws_hosted_labels
         # uses: ./.github/actions/aws_hosted_labels
@@ -41,6 +39,8 @@ jobs:
         # with:
           # self_hosted_runners_override: "true"
           # self_hosted_runners_url: "https://gha.cpp.al/switch"
+      - name: Clone repo
+        uses: actions/checkout@v3
 
   build:
     defaults:
