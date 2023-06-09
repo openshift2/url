@@ -36,8 +36,8 @@ jobs:
         id: aws_hosted_labels
         # uses: ./.github/actions/aws_hosted_labels
         uses: samd2/aws-hosted-runners@v0.1.2
-        # with:
-          # self_hosted_runners_override: "true"
+        with:
+          self_hosted_runners_override: "true"
           # self_hosted_runners_url: "https://gha.cpp.al/switch"
       - name: Clone repo
         uses: actions/checkout@v3
