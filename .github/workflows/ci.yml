@@ -30,17 +30,23 @@ jobs:
   runner-selection:
     runs-on: ubuntu-latest
     outputs:
-      labelmatrix: ${{ steps.aws_hosted_labels.outputs.labelmatrix }}
+      labelmatrix: ${{ steps.aws_hosted_runners.outputs.labelmatrix }}
     steps:
+      - name: Clone repo
+        uses: actions/checkout@v3
       - name: AWS Hosted Runners
-        id: aws_hosted_labels
+        id: aws_hosted_runners
         # uses: ./.github/actions/aws_hosted_labels
         uses: samd2/aws-hosted-runners@v0.1.3
         with:
           self_hosted_runners_override: "true"
           # self_hosted_runners_url: "https://gha.cpp.al/switch"
-      - name: Clone repo
-        uses: actions/checkout@v3
+      - name: Debugg1
+        id: debugg1
+        shell: bash
+        run: |
+          echo "Debugging"
+          echo ${{ steps.aws_hosted_runners.outputs.labelmatrix }}
 
   build:
     defaults:
@@ -91,12 +97,19 @@ jobs:
     name: ${{ matrix.name }}
     timeout-minutes: 120
     needs: [runner-selection]
-    runs-on: ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)[matrix.os] }}
+    runs-on: ${{matrix.os}}
     container: ${{matrix.container}}
 
     steps:
       - name: Clone Boost.URL
         uses: actions/checkout@v3
+
+      - name: Debugg
+        id: debugg
+        shell: bash
+        run: |
+          echo "Debugging"
+          echo ${{ needs.runner-selection.outputs.labelmatrix }} 
 
       - name: Install packages
         if: ${{ !startsWith(matrix.os, 'windows') && (matrix.container || matrix.install) }}
