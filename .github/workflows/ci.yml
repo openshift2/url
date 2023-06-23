@@ -260,13 +260,12 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
 
   changelog:
-    needs: cpp-matrix
+    needs: [cpp-matrix,runner-selection]
     defaults:
       run:
         shell: bash
 
     name: Changelog Summary
-    needs: [runner-selection]
     runs-on: ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)['ubuntu-22.04'] }}
     timeout-minutes: 120
 
