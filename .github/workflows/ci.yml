@@ -67,7 +67,7 @@ jobs:
           trace-commands: true
 
   build:
-    needs: cpp-matrix
+    needs: [cpp-matrix,runner-selection]
     defaults:
       run:
         shell: bash
@@ -77,7 +77,6 @@ jobs:
         include: ${{ fromJSON(needs.cpp-matrix.outputs.matrix) }}
 
     name: ${{ matrix.name }}
-    needs: [runner-selection]
     runs-on: ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)[${{matrix.runs-on}}] }}
     container: ${{matrix.container}}
     timeout-minutes: 120
