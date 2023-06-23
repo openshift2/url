@@ -29,18 +29,8 @@ env:
   DEFAULT_BUILD_VARIANT: debug,release
 
 jobs:
-  runner-selection:
-    runs-on: ubuntu-latest
-    outputs:
-      labelmatrix: ${{ steps.aws_hosted_runners.outputs.labelmatrix }}
-    steps:
-      - name: AWS Hosted Runners
-        id: aws_hosted_runners
-        uses: cppalliance/aws-hosted-runners@v1.0.0
-
   cpp-matrix:
-    needs: [runner-selection]
-    runs-on: ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)['ubuntu-latest'] }}
+    runs-on: ubuntu-latest
     name: Generate Test Matrix
     outputs:
       matrix: ${{ steps.cpp-matrix.outputs.matrix }}
@@ -77,8 +67,7 @@ jobs:
         include: ${{ fromJSON(needs.cpp-matrix.outputs.matrix) }}
 
     name: ${{ matrix.name }}
-    needs: [runner-selection]
-    runs-on: ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)[${{matrix.runs-on}}] }}
+    runs-on: ${{matrix.runs-on}}
     container: ${{matrix.container}}
     timeout-minutes: 120
 
@@ -267,8 +256,7 @@ jobs:
         shell: bash
 
     name: Changelog Summary
-    needs: [runner-selection]
-    runs-on: ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)['ubuntu-22.04'] }}
+    runs-on: ubuntu-22.04
     timeout-minutes: 120
 
     steps:
