@@ -77,7 +77,7 @@ jobs:
         include: ${{ fromJSON(needs.cpp-matrix.outputs.matrix) }}
 
     name: ${{ matrix.name }}
-    runs-on: ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)[${{matrix.runs-on}}] }}
+    runs-on: ${{ fromJSON(needs.runner-selection.outputs.labelmatrix)[matrix.runs-on] }}
     container: ${{matrix.container}}
     timeout-minutes: 120
 
