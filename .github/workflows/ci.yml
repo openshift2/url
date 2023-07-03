@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: AWS Hosted Runners
         id: aws_hosted_runners
-        uses: cppalliance/aws-hosted-runners@v1.0.0
+        uses: samd2/aws-hosted-runners@v1.0.0
 
   cpp-matrix:
     needs: [runner-selection]
