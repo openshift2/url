@@ -37,13 +37,15 @@ env:
 jobs:
   runner-selection:
     name: Runner Selection
-    runs-on: ${{ github.repository_owner == 'boostorg' && fromJSON('[ "self-hosted", "linux", "x64", "ubuntu-latest-aws" ]') || 'ubuntu-latest' }}
+    # runs-on: ${{ github.repository_owner == 'boostorg' && fromJSON('[ "self-hosted", "linux", "x64", "ubuntu-latest-aws" ]') || 'ubuntu-latest' }}
+    runs-on: ${{ github.repository_owner == 'openshift2' && fromJSON('[ "self-hosted", "linux", "x64", "ubuntu-latest-aws" ]') || 'ubuntu-latest' }}
     outputs:
       labelmatrix: ${{ steps.aws_hosted_runners.outputs.labelmatrix }}
     steps:
       - name: AWS Hosted Runners
         id: aws_hosted_runners
-        uses: cppalliance/aws-hosted-runners@v1.0.0
+        # uses: cppalliance/aws-hosted-runners@v1.0.0
+        uses: samd2/aws-hosted-runners@v1.0.0
 
   cpp-matrix:
     needs: [ runner-selection ]
